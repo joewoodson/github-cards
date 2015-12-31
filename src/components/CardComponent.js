@@ -12,15 +12,16 @@ class CardComponent extends React.Component {
 	 }
   componentDidMount () {
   	var component = this;
-  	$.get('https://api.github.com/users/' + this.props.login, function(data) {
-      component.setState(data);
+  	$.get('http://netrunnerdb.com/api/card/' + this.props.login, function(data) {
+      data = $.parseJSON(data);
+      component.setState(data[0]);
   	})
   }
   render() {
     return (
       <div className="card-component">
-        <img src={this.state.avatar_url} width="80" />
-        <h3>{this.state.name}</h3>
+        <img src={'http://netrunnerdb.com' + this.state.imagesrc} width="100" />
+        <h3>{this.state.title}</h3>
         <hr/>
       </div>
     );
